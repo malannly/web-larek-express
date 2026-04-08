@@ -25,11 +25,11 @@ export const setProduct = async (req: Request, res: Response, next: NextFunction
       return next(new BadRequestError('Validation error during the creation of the product'));
     }
     if (
-      (error instanceof Error && error.message.includes('E11000')) ||
-      (error as any).code === 11000
+      (error instanceof Error && error.message.includes('E11000'))
+      || (error as any).code === 11000
     ) {
       return next(new ConflictError('The product with this title has already exists'));
     }
-      return next(error);
+    return next(error);
   }
 };

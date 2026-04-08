@@ -14,19 +14,8 @@ interface Order {
 
 const setOrder = async (req: Request, res: Response, next: NextFunction) => {
   const {
-    payment, email, phone, address, total, items,
+    total, items,
   }: Order = req.body;
-
-  // check if all filds are filled
-  if (!payment || !email || !address || !phone || total === undefined || !items) {
-    return next(new BadRequestError('all fields are required'));
-  }
-
-  // static method of checking the email
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!regex.test(email)) {
-    return next(new BadRequestError('wrong email'));
-  }
 
   // checks if the items is an array and if it
   if (!Array.isArray(items) || items.length === 0) {
