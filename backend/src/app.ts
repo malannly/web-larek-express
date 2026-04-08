@@ -9,6 +9,7 @@ import { errorHandler, notFoundHandler } from './middlewares/error-handler';
 
 import { PORT, MONGO_URI } from './config';
 import { requestLogger, errorLogger } from './middlewares/logger';
+import Product from './models/product';
 
 const app = express();
 
@@ -21,7 +22,7 @@ app.use(requestLogger);
 
 app.use('/product', productRoutes);
 app.use('/order', orderRoutes);
-
+app.delete('/reset', async (_req, res) => { try { await Product.deleteMany({}); res.status(200).send({ message: 'All products deleted' }); } catch (err) { res.status(500).send({ message: 'Failed to reset products', error: err }); } });
 app.use(errorLogger);
 
 app.use(notFoundHandler);
