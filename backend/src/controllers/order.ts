@@ -19,12 +19,12 @@ const setOrder = async (req: Request, res: Response, next: NextFunction) => {
 
   // check if all filds are filled
   if (!payment || !email || !address || !phone || total === undefined || !items) {
-    return res.status(400).send({ error: 'all filds are required' });
+    return next(new BadRequestError('all fields are required'));
   }
 
   // checks if the paynebt is by card or cash
   if (!['card', 'online'].includes(payment)) {
-    return res.status(400).send({ error: 'payment can be only by card or cash' });
+    return next(new BadRequestError('payment can be only by card or cash'));
   }
 
   // static method of checking the email
