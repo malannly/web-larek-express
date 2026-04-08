@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import path from 'path';
+import { errors } from 'celebrate';
 import productRoutes from './routes/product';
 import orderRoutes from './routes/order';
 import { errorHandler, notFoundHandler } from './middlewares/error-handler';
@@ -24,6 +25,7 @@ app.use('/order', orderRoutes);
 app.use(errorLogger);
 
 app.use(notFoundHandler);
+app.use(errors());
 app.use(errorHandler);
 
 mongoose.connect(MONGO_URI)
