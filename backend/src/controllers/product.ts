@@ -19,13 +19,13 @@ export const getProducts = async (_req: Request, res: Response, next: NextFuncti
 export const setProduct = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const product = await Product.create(req.body);
-    return res.status(201).send(product);
+    return res.send(product);
   } catch (error: any) {
     if (error.name === 'ValidationError') {
-       return res.status(400).send({ message: 'Validation error during the creation of the product' });
+      return next(new BadRequestError('Validation error during the creation of the product'));
     }
     if (error.message.includes('E11000')) {
-      return res.status(409).send({ message: 'The product with this title already exists' });
+      return next(new ConflictError('The product with this title has already exists'));
     }
 
     return next(error);
