@@ -50,7 +50,7 @@ const setOrder = async (req: Request, res: Response, next: NextFunction) => {
     return next(new BadRequestError('the product is not found'));
   }
 
-  const sum = products.reduce((acc, p) => acc + (p.price || 0), 0);
+  const sum = products.reduce((acc, p) => acc + (p.price ?? 0), 0);
   if (sum !== total) {
     return next(new BadRequestError('wrong sum of the order'));
   }

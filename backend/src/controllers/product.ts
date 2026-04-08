@@ -5,7 +5,7 @@ import ConflictError from '../errors/conflict-error';
 
 export const getProducts = async (_req: Request, res: Response, next: NextFunction) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find() || [];
 
     res.status(200).send({
       items: products,
@@ -19,7 +19,7 @@ export const getProducts = async (_req: Request, res: Response, next: NextFuncti
 export const setProduct = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const product = await Product.create(req.body);
-    return res.send(product);
+    return res.status(201).send(product);
   } catch (error: any) {
     if (error.name === 'ValidationError') {
       return next(new BadRequestError('Validation error during the creation of the product'));
