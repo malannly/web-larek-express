@@ -22,11 +22,6 @@ const setOrder = async (req: Request, res: Response, next: NextFunction) => {
     return next(new BadRequestError('all fields are required'));
   }
 
-  // checks if the paynebt is by card or cash
-  if (!['card', 'online'].includes(payment)) {
-    return next(new BadRequestError('payment can be only by card or cash'));
-  }
-
   // static method of checking the email
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!regex.test(email)) {
