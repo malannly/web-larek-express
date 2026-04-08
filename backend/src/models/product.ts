@@ -25,7 +25,10 @@ const productSchema = new Schema<IProduct>({
       required: [true, 'Поле originalName должно быть заполнено'],
     },
   },
-  category: { type: String },
+  category: {
+    type: String,
+    required: [true, 'Поле category должно быть заполнено'],
+  },
   price: { type: Number, default: null },
 });
 
