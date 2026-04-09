@@ -62,7 +62,7 @@ const setOrder = async (req: Request, res: Response, next: NextFunction) => {
       total,
     });
   } catch (error) {
-    return next(new BadRequestError('Error during the creation of the order'));
+    return next(new BadRequestError('error during the creation of the order'));
   }
 };
 
