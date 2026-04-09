@@ -1,6 +1,6 @@
-import AppError from './base';
+import BaseError from './base';
 
-class NotFoundError extends AppError {
+class NotFoundError extends BaseError {
   constructor() {
     super('Not found', 404);
   }

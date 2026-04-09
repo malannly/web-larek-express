@@ -1,6 +1,6 @@
-import AppError from './base';
+import BaseError from './base';
 
-class ConflictError extends AppError {
+class ConflictError extends BaseError {
   constructor(message = 'The title is already used') {
     super(message, 409);
   }

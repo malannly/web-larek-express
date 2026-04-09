@@ -1,6 +1,6 @@
-import AppError from './base';
+import BaseError from './base';
 
-class BadRequestError extends AppError {
+class BadRequestError extends BaseError {
   constructor(message = 'BadRequest') {
     super(message, 400);
   }

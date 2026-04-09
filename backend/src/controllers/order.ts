@@ -22,9 +22,9 @@ const setOrder = async (req: Request, res: Response, next: NextFunction) => {
     return next(new BadRequestError('all fields are required'));
   }
 
-  // checks if the paynebt is by card or cash
+  // checks if the payment is by card or cash
   if (!['card', 'online'].includes(payment)) {
-    return next(new BadRequestError('all fields are required'));
+    return next(new BadRequestError('the payment has to be chosen either cash or card'));
   }
 
   // static method of checking the email
@@ -33,7 +33,7 @@ const setOrder = async (req: Request, res: Response, next: NextFunction) => {
     return next(new BadRequestError('wrong email'));
   }
 
-  // checks if the items is an array and if it
+  // checks if the items is an array
   if (!Array.isArray(items) || items.length === 0) {
     return next(new BadRequestError('items cannot be an empty string'));
   }

@@ -12,7 +12,6 @@ import { errorHandler, notFoundHandler } from './middlewares/error-handler';
 
 import { PORT, DB_ADDRESS } from './config';
 import { requestLogger, errorLogger } from './middlewares/logger';
-import Product from './models/product';
 
 dotenv.config();
 
@@ -27,7 +26,6 @@ app.use(requestLogger);
 
 app.use('/product', productRoutes);
 app.use('/order', orderRoutes);
-app.delete('/reset', async (_req, res) => { try { await Product.deleteMany({}); res.status(200).send({ message: 'All products deleted' }); } catch (err) { res.status(500).send({ message: 'Failed to reset products', error: err }); } });
 app.use(errorLogger);
 
 app.use(notFoundHandler);
@@ -37,7 +35,6 @@ app.use(errorHandler);
 mongoose.connect(DB_ADDRESS)
   .then(() => {
     console.log('connected to MongoDB');
-    console.log('MONGO_URI:', process.env.DB_ADDRESS);
   })
   .catch(console.error);
 
