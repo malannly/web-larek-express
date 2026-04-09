@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import path from 'path';
+import dotenv from 'dotenv';
 import { errors } from 'celebrate';
 import productRoutes from './routes/product';
 import orderRoutes from './routes/order';
@@ -10,6 +11,8 @@ import { errorHandler, notFoundHandler } from './middlewares/error-handler';
 import { PORT, MONGO_URI } from './config';
 import { requestLogger, errorLogger } from './middlewares/logger';
 import Product from './models/product';
+
+dotenv.config();
 
 const app = express();
 
@@ -32,6 +35,7 @@ app.use(errorHandler);
 mongoose.connect(MONGO_URI)
   .then(() => {
     console.log('connected to MongoDB');
+    console.log('MONGO_URI:', process.env.MONGO_URI);
   })
   .catch(console.error);
 
