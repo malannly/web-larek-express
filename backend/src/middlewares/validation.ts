@@ -11,7 +11,7 @@ export const validateProduct = celebrate({
       .required(),
     category: Joi.string().required(),
     description: Joi.string().allow('').optional(),
-    price: Joi.number().allow(null),
+    price: Joi.number().allow(null).optional(),
   }),
 });
 

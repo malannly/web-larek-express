@@ -1,14 +1,16 @@
+import dotenv from 'dotenv';
+
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import path from 'path';
-import dotenv from 'dotenv';
+
 import { errors } from 'celebrate';
 import productRoutes from './routes/product';
 import orderRoutes from './routes/order';
 import { errorHandler, notFoundHandler } from './middlewares/error-handler';
 
-import { PORT, MONGO_URI } from './config';
+import { PORT, DB_ADDRESS } from './config';
 import { requestLogger, errorLogger } from './middlewares/logger';
 import Product from './models/product';
 
@@ -32,10 +34,10 @@ app.use(notFoundHandler);
 app.use(errors());
 app.use(errorHandler);
 
-mongoose.connect(MONGO_URI)
+mongoose.connect(DB_ADDRESS)
   .then(() => {
     console.log('connected to MongoDB');
-    console.log('MONGO_URI:', process.env.MONGO_URI);
+    console.log('MONGO_URI:', process.env.DB_ADDRESS);
   })
   .catch(console.error);
 
